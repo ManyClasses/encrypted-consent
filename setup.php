@@ -1,6 +1,6 @@
 <?php
 
-require('config.php');
+include('config.php');
 
 // connect to sqlite database
 $db = new SQLite3($DB_NAME.".sqlite");
