@@ -54,14 +54,14 @@ echo("</body>");
 $consentVal_query = $db->query("SELECT * FROM ".$TABLE_NAME." WHERE used = 0 AND consent = 1 LIMIT 1;");
 if($res = $consentVal_query->fetchArray()){
 	$consentVal = $res['key'];
-	$db->exec("UPDATE ".$TABLE_NAME." SET used = 1 WHERE key = ".$consentVal.";");
+	$db->exec("UPDATE ".$TABLE_NAME." SET used = 1 WHERE key = '".$consentVal."';");
 } else {
 
 }
 $dissentVal_query = $db->query("SELECT key FROM ".$TABLE_NAME." WHERE used = 0 AND consent = 0 LIMIT 1;");
 if($res = $dissentVal_query->fetchArray()){
 	$dissentVal = $res['key'];
-	$db->exec("UPDATE ".$TABLE_NAME." SET used = 1 WHERE key = ".$dissentVal.";");
+	$db->exec("UPDATE ".$TABLE_NAME." SET used = 1 WHERE key = '".$dissentVal."';");
 } else {
 
 }
