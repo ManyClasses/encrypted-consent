@@ -34,6 +34,7 @@ if(!($res = $table_exists_query->fetchArray())){
 	$statement->bindParam(':key',$key);
 	$statement->bindParam(':consent',$consent);
 	$statement->bindParam(':used',$used);
+	$db->beginTransaction();
 	foreach($consentdata as $item){
 		$key = $item['key'];
 		$consent = $item['consent'];
@@ -41,6 +42,7 @@ if(!($res = $table_exists_query->fetchArray())){
 
 		$statement->execute();
 	}
+	$db->commit();
 
 	$success_query = $db->query("SELECT COUNT(key) as count FROM ".$TABLE_NAME.";");
 	$nrows = $success_query->fetchArray()['count'];
