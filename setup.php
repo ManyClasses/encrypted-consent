@@ -10,11 +10,11 @@ $table_exists_query = $db->query("SELECT * FROM sqlite_master WHERE name='".$TAB
 if(!($res = $table_exists_query->fetchArray())){
 	// create data to populate table
 	$consentdata = array();
-	$consentkeys = range(0, 10**($KEY_LENGTH-1));
+	$consentkeys = range(0, 10**($KEY_LENGTH)-1);
 	shuffle($consentkeys);
 	for($i = 0; $i < count($consentkeys); $i++){
 		$consentdata[] = array(
-			'key' => str_pad(strval($consentkeys[$i]), $KEY_LENGTH, '0'),
+			'key' => str_pad(strval($consentkeys[$i]), $KEY_LENGTH, '0', STR_PAD_LEFT),
 			'consent' => rand(0,1),
 			'used' => 0
 		);
