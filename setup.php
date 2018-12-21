@@ -2,6 +2,9 @@
 
 include('config.php');
 
+ini_set("display_errors",1);
+error_reporting(E_ALL);
+
 // connect to sqlite database
 $db = new SQLite3($DB_NAME.".sqlite");
 
@@ -28,13 +31,15 @@ if(!($res = $table_exists_query->fetchArray())){
 		used TINYINT
 	)");
 
+	// start transaction
+	$db->exec("BEGIN;");
+
 	// add values
 	$insert = "INSERT INTO ".$TABLE_NAME." (key, consent, used) VALUES (:key, :consent, :used)";
 	$statement = $db->prepare($insert);
 	$statement->bindParam(':key',$key);
 	$statement->bindParam(':consent',$consent);
 	$statement->bindParam(':used',$used);
-	$db->beginTransaction();
 	foreach($consentdata as $item){
 		$key = $item['key'];
 		$consent = $item['consent'];
@@ -42,7 +47,7 @@ if(!($res = $table_exists_query->fetchArray())){
 
 		$statement->execute();
 	}
-	$db->commit();
+	$db->exec("COMMIT;");
 
 	$success_query = $db->query("SELECT COUNT(key) as count FROM ".$TABLE_NAME.";");
 	$nrows = $success_query->fetchArray()['count'];
