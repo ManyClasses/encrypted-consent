@@ -32,7 +32,7 @@ $db = new SQLite3($DB_NAME.".sqlite");
 // check if table exists
 $table_exists_query = $db->query("SELECT * FROM sqlite_master WHERE name='".$TABLE_NAME."' AND type='table';");
 if(!($res = $table_exists_query->fetchArray())){
-	echo("<p>Error. Please alert your instructor.</p>")
+	echo("<p>Error. Please alert your instructor.</p>");
 } else {
 	echo("
 	<table>
@@ -82,6 +82,6 @@ function myFunction(choice) {
 // Close the HTML
 echo("
 </html>
-")
+");
 	
 ?>
