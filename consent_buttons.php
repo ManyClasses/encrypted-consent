@@ -27,7 +27,7 @@ label {
 ");
 
 // connect to sqlite database
-$db = new SQLite3($DB_NAME.".sqlite");
+$db = new PDO("mysql:host=$SERVERNAME;port=$PORT;dbname=$DBNAME", $USERNAME, $PASSWORD);
 
 // check if table exists
 $table_exists_query = $db->query("SELECT * FROM sqlite_master WHERE name='".$TABLE_NAME."' AND type='table';");
