@@ -26,12 +26,13 @@ label {
 <body>
 ");
 
-// connect to sqlite database
+// connect to database
 $db = new PDO("mysql:host=$SERVERNAME;port=$PORT;dbname=$DBNAME", $USERNAME, $PASSWORD);
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 // check if table exists
-$table_exists_query = $db->query("SELECT * FROM sqlite_master WHERE name='".$TABLE_NAME."' AND type='table';");
-if(!($res = $table_exists_query->fetchArray())){
+$res = $db->query("SHOW TABLES LIKE '".$TABLE_NAME."';");
+if($res->rowCount() == 0){
 	echo("<p>Error. Please alert your instructor.</p>");
 } else {
 	echo("
@@ -51,17 +52,17 @@ if(!($res = $table_exists_query->fetchArray())){
 }
 echo("</body>");
 
-$consentVal_query = $db->query("SELECT * FROM ".$TABLE_NAME." WHERE used = 0 AND consent = 1 LIMIT 1;");
-if($res = $consentVal_query->fetchArray()){
-	$consentVal = $res['key'];
-	$db->exec("UPDATE ".$TABLE_NAME." SET used = 1 WHERE key = '".$consentVal."';");
+$consentVal_query = $db->query("SELECT codekey FROM ".$TABLE_NAME." WHERE used = 0 AND consent = 1 LIMIT 1;");
+if($res = $consentVal_query->fetch(PDO::FETCH_ASSOC)){
+	$consentVal = $res['codekey'];
+	$db->exec("UPDATE ".$TABLE_NAME." SET used = 1 WHERE codekey = '".$consentVal."';");
 } else {
 
 }
-$dissentVal_query = $db->query("SELECT key FROM ".$TABLE_NAME." WHERE used = 0 AND consent = 0 LIMIT 1;");
-if($res = $dissentVal_query->fetchArray()){
-	$dissentVal = $res['key'];
-	$db->exec("UPDATE ".$TABLE_NAME." SET used = 1 WHERE key = '".$dissentVal."';");
+$dissentVal_query = $db->query("SELECT codekey FROM ".$TABLE_NAME." WHERE used = 0 AND consent = 0 LIMIT 1;");
+if($res = $dissentVal_query->fetch(PDO::FETCH_ASSOC)){
+	$dissentVal = $res['codekey'];
+	$db->exec("UPDATE ".$TABLE_NAME." SET used = 1 WHERE codekey = '".$dissentVal."';");
 } else {
 
 }
