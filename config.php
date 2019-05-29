@@ -1,6 +1,10 @@
 <?php
 // parameters
-$DB_NAME = 'consentdb';
+$SERVERNAME = 'localhost';
+$USERNAME = '';
+$PASSWORD = '';
+$DBNAME = 'consentdb';
+$PORT = 3306;
 $TABLE_NAME = 'consentkeys';
 $KEY_LENGTH = 3;
 ?>
