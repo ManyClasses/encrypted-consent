@@ -73,10 +73,8 @@ echo("
 function myFunction(choice) {
 	if (choice == 'consent') {
 		document.getElementById(\"Value\").innerHTML = \"".$consentVal."\";
-		document.querySelector(\"#questions .question_holder .answers input\").value = \"".$consentVal."\"; 
 	} else {
 		document.getElementById(\"Value\").innerHTML = \"".$dissentVal."\";
-		document.querySelector(\"#questions .question_holder .answers input\").value = \"".$dissentVal."\";
 	}
 }
 </script>
