@@ -2,11 +2,13 @@
 
 function add_keys($key_length, $db, $table){
     // create data to populate table
-    $consentkeys = range(0, 10**($key_length)-1);
+    $consentkeys = range(10**($key_length-1), 10**($key_length)-1);
     shuffle($consentkeys);
-    for($i = 0; $i < count($consentkeys); $i++){
+    
+    // don't need this piece below since we start at 100000 if key length is 6
+    /* for($i = 0; $i < count($consentkeys); $i++){
 		$consentkeys[$i] = str_pad(strval($consentkeys[$i]), $key_length, '0', STR_PAD_LEFT);		
-	}
+	} */
     // create table
     $db->exec("CREATE TABLE IF NOT EXISTS ".$table." (
         id INTEGER PRIMARY KEY AUTO_INCREMENT,

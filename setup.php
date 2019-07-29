@@ -8,7 +8,7 @@ include('add_keys.php');
 ini_set("display_errors",1);
 error_reporting(E_ALL);
 
-// connect to sqlite database
+// connect to sql database
 $db = new PDO("mysql:host=$SERVERNAME;port=$PORT;dbname=$DBNAME", $USERNAME, $PASSWORD);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
