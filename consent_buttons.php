@@ -18,7 +18,6 @@ label {
 	font-size:16px;
 	font-weight:400;
 	line-height:24px;
-
 }
 </style>
 </head>
@@ -39,7 +38,7 @@ if($res->rowCount() == 0){
 	<table>
 	<tr>
 	<td>
-	<label><input type=\"radio\" name=\"choice\" value=\"consent\"  onclick=\"myFunction('consent')\">I agree to participate.</label>
+	<label><input type=\"radio\" name=\"choice\" value=\"consent\"  onclick=\"myFunction('consent')\">I agree to participate and I authorize the release of these student records.</label>
 	</td></tr>
 	<tr><td style=\"padding-bottom:20px;\">
 	<label><input type=\"radio\" name=\"choice\" value=\"dissent\"  onclick=\"myFunction('dissent')\">I do not agree to participate.</label>
